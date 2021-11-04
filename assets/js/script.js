@@ -1,4 +1,6 @@
-
+let canvas = document.getElementById("myCanvas");
+let ctx = canvas.getContext("2d");
+let fileInput = document.querySelector("#file");
 
 var _URL = window.URL || window.webkitURL;
 
@@ -7,21 +9,19 @@ $("#file").change(function(e) {
     if ((file = this.files[0])) {
         img = new Image();
         img.onload = function() {
-            let generatedURL = "https://via.placeholder.com/" + this.width + "x" + this.height;
-            // $('.drow').append('<canvas id="myCanvas">Your browser does not support the HTML5 canvas tag.</canvas>'); 
             $("#myCanvas").attr("width", this.width);
             $("#myCanvas").attr("height", this.height);
-            amarImage(generatedURL);
-            
-            function download_image(){
-                var notunCanvas = document.getElementById("myCanvas");
-                // draw to canvas...
-                notunCanvas.toBlob(function(blob) {
-                    saveAs(blob, "pretty image.png");
-                });
-            }
+            let canvasWidth = canvas.width;
+            let canvasHeight = canvas.height;
+            convertCanvas($('#color').val(), canvasWidth, canvasHeight);
+            getDataUri();
+            $('#color').change(function(){
+                convertCanvas($(this).val(), canvasWidth, canvasHeight);
+                getDataUri();
+            });
+            let fileName = fileInput.files[0].name;
+            $(".btn").attr("download", fileName);
         };
-        img.setAttribute('crossorigin', 'anonymous');
         img.onerror = function() {
             alert( "not a valid file: " + file.type);
         };
@@ -29,22 +29,17 @@ $("#file").change(function(e) {
     }
 });
 
-function amarImage(imageURL){
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    var notunImage = new Image();
-    notunImage.src = imageURL;
-    notunImage.onload = function() {
-        ctx.drawImage(notunImage, 0, 0);
-    }
-}
+function convertCanvas(color, width, height) {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "#969696";
+    ctx.font =  width/20 + "px 'Montserrat', sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(width + "x" + height , width/2, height/2);
+};
 
-// function download_image(){
-//     var notunCanvas = document.getElementById("myCanvas");
-//     var image = notunCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-//     var link = document.createElement('a');
-//     link.download = "placeholder.png";
-//     link.href = image;
-//     link.innerHTML = "Download";
-//     link.click()
-// }
+function getDataUri(){
+    var pngUrl = canvas.toDataURL();
+    $(".btn").attr("href", pngUrl);
+};

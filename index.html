@@ -21,12 +21,31 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <input type="file" name="file" id="file">
-    <input type="color" name="color" id="color" value="#cccccc">
-    <canvas id="myCanvas" width="0" height="0">
-        Your browser does not support the HTML5 canvas tag.
-    </canvas>
-    <a href="#!" class="btn" download>Download</a>
+    <div class="uploader__wrapper">
+        <h2 class="uploader__title">Upload your image</h2>
+        <p class="uploader__text">
+            <img src="./assets/images/warning.png" alt="warning icon" class="uploader__text__icon">
+            File should be png, jpg, webp, gif</p>
+        <input type="file" name="file" id="file" class="uploader__input">
+        <label for="file" class="uploader__label">
+            <img src="./assets/images/upload.png" alt="uploader image" class="uploader__image">
+            <p class="uploader__text">click & select image</p>
+        </label>
+        <div class="uploader__action">
+            <div class="uploader__action__preview">
+                <h3 class="uploader__title">Preview</h3>
+                <canvas id="imageCanvas" width="0" height="0" class="canvas">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <label for="color" class="color-picker__label">
+                    <input type="color" name="color" id="color" value="#cccccc" class="color-picker__input">
+                    <img src="./assets/images/color-picker.png" alt="color-picker" class="color-picker__image">
+                    <span class="color-picker__text">Edit Background Color</span>
+                </label>
+            </div>
+            <a href="#!" class="btn btn--download">Download</a>
+        </div>
+    </div>
 
     <!-- All Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>

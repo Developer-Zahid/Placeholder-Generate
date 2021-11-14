@@ -1,4 +1,4 @@
-let canvas = document.getElementById("myCanvas");
+let canvas = document.getElementById("imageCanvas");
 let ctx = canvas.getContext("2d");
 let fileInput = document.querySelector("#file");
 
@@ -9,8 +9,8 @@ $("#file").change(function(e) {
     if ((file = this.files[0])) {
         img = new Image();
         img.onload = function() {
-            $("#myCanvas").attr("width", this.width);
-            $("#myCanvas").attr("height", this.height);
+            $("#imageCanvas").attr("width", this.width);
+            $("#imageCanvas").attr("height", this.height);
             let canvasWidth = canvas.width;
             let canvasHeight = canvas.height;
             convertCanvas($('#color').val(), canvasWidth, canvasHeight);
@@ -20,7 +20,8 @@ $("#file").change(function(e) {
                 getDataUri();
             });
             let fileName = fileInput.files[0].name;
-            $(".btn").attr("download", fileName);
+            $(".btn--download").attr("download", fileName);
+            $(".uploader__action").fadeIn(500);
         };
         img.onerror = function() {
             alert( "not a valid file: " + file.type);
@@ -41,5 +42,5 @@ function convertCanvas(color, width, height) {
 
 function getDataUri(){
     var pngUrl = canvas.toDataURL();
-    $(".btn").attr("href", pngUrl);
+    $(".btn--download").attr("href", pngUrl);
 };

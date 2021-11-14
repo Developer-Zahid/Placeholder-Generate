@@ -1,4 +1,174 @@
+$bg-color: #f4f8fe;
+$text-color: #3b3b3b;
+$active-color: #86f1a7;
+$focus-color: #f4dd45;
+$secondary-color: #6bbef6;
+$white-color: #ffffff;
+$black-color: #000000;
+$radius: 2rem;
+$primary-font: 'Poppins', sans-serif;
+$secondary-font: 'Montserrat', sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+*{
+    box-sizing: border-box;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba($active-color, $alpha: 0.1);
+}
+
+::selection{
+    color: $white-color;
+    background-color: $active-color;
+}
+
+html{
+    font-size: clamp(8px, 2vw, 10px);
+}
+
+%center-elements{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+%pointer{
+    cursor: pointer;
+}
+
 body{
-    font-family: 'Montserrat', sans-serif;
+    @extend %center-elements;
+    min-height: 100vh;
+    font-family: $primary-font;
+    color: $text-color;
+    background-color: $bg-color;
+    text-align: center;
+    margin: 0;
+    padding: 15px;
+    &::before{
+        content: "Placeholder Generator";
+        position: fixed;
+        top: 0;
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        font-weight: bold;
+        z-index: -1;
+        color: rgba($text-color, $alpha: 0.03);
+    }
+}
+
+img{
+    object-fit: cover;
+}
+
+.uploader__input,
+.color-picker__input{
+    position: fixed;
+    width: 0;
+    height: 0;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn{
+    display: inline-block;
+    font-size: 1.8rem;
+    color: $white-color;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 2rem;
+    transition: background .3s ease-in-out;
+    &--download{
+        background-color: $secondary-color;
+    }
+    &:hover,
+    &:focus-visible{
+        background-color: $active-color;
+    }
+}
+
+.uploader__input:focus-visible ~ .uploader__label .uploader__image{
+    transform: translateY(-5%);
+}
+
+.color-picker__input:focus-visible ~ .color-picker__text{
+    text-decoration: underline;
+}
+
+.uploader{
+    &__wrapper{
+        width: 100%;
+        max-width: 40rem;
+        color: darken($white-color, $amount: 35);
+        background-color: $white-color;
+        border-radius: $radius;
+        padding: 3rem 2rem;
+        text-align: center;
+        box-shadow: 0 0.8rem 5rem rgba($black-color, $alpha: 0.03);
+        @extend %center-elements;
+    }
+    &__title{
+        font-size: 2.5rem;
+        color: $text-color;
+        margin: 0;
+    }
+    &__text{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        &__icon{
+            margin-right: 5px;
+        }
+    }
+    &__label{
+        width: 100%;
+        padding: 3rem;
+        border: 2px dashed darken($bg-color, $amount: 10);
+        border-radius: $radius / 2;
+        background-color: rgba($bg-color, $alpha: 0.4);
+        @extend %pointer;
+        &:hover{
+            .uploader__image{
+                transform: translateY(-5%);
+            }
+        }
+    }
+    &__image{
+        width: 100%;
+        max-width: 10rem;
+        pointer-events: none;
+        user-select: none;
+        filter: drop-shadow(0 0 3rem rgba($black-color, $alpha: 0.01));
+        transition: transform .3s ease-in-out;
+    }
+    &__action{
+        display: none;
+        padding-top: 2rem;
+    }
+}
+
+.color-picker{
+    &__label{
+        @extend %center-elements;
+        margin: 1rem 0;
+        @extend %pointer;
+    }
+    &__image{
+        width: 100%;
+        max-width: 5rem;
+    }
+    &__text{
+        display: inline-block;
+        font-size: 1.3rem;
+        margin-top: 5px;
+    }
+}
+
+.canvas{
+    max-width: 100%;
 }

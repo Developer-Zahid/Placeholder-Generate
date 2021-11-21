@@ -1,5 +1,8 @@
+/* SCSS Variables */
+/* Google Fonts Link */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+/* Reset Style */
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -22,6 +25,7 @@ html {
   font-size: clamp(8px, 2vw, 10px);
 }
 
+/* Common Center Element Style */
 body, .uploader__wrapper, .color-picker__label {
   display: -webkit-box;
   display: -webkit-flex;
@@ -47,6 +51,7 @@ body, .uploader__wrapper, .color-picker__label {
           justify-content: center;
 }
 
+/* Common Cursor Style */
 .uploader__label, .color-picker__label {
   cursor: pointer;
 }

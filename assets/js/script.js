@@ -4,6 +4,7 @@ let fileInput = document.querySelector("#file");
 
 var _URL = window.URL || window.webkitURL;
 
+/* After Input Select Function */
 $("#file").change(function(e) {
     var file, img;
     if ((file = this.files[0])) {
@@ -30,6 +31,7 @@ $("#file").change(function(e) {
     }
 });
 
+/* Create and Update Canvas Width Height & Size Function */
 function convertCanvas(color, width, height) {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = color;
@@ -40,7 +42,16 @@ function convertCanvas(color, width, height) {
     ctx.fillText(width + "x" + height , width/2, height/2);
 };
 
+/* Create Data URI from Canvas Function */
 function getDataUri(){
     var pngUrl = canvas.toDataURL();
     $(".btn--download").attr("href", pngUrl);
 };
+
+/* Uninspectable Function */
+document.onkeydown = (e)=>{
+    const inspectTool = e.charCode || e.keyCode;
+    if(inspectTool == 123 || inspectTool == 85 || inspectTool == 83 || inspectTool == 77 || inspectTool == 73 || inspectTool == 67){
+        e.preventDefault();
+    }
+}
